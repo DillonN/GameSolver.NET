@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GameSolver.NET.Common\GameSolver.NET.Common.csproj" />
+    <ProjectReference Include="..\GameSolver.NET.Extensions\GameSolver.NET.Extensions.csproj" />
   </ItemGroup>
 
 </Project>

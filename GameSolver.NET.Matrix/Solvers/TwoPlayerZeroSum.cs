@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using GameSolver.NET.Common;
+using GameSolver.NET.Extensions;
 using MathNet.Spatial.Euclidean;
 
 namespace GameSolver.NET.Matrix.Solvers
@@ -10,10 +11,20 @@ namespace GameSolver.NET.Matrix.Solvers
     public class TwoPlayerZeroSum : TwoPlayerSolver
     {
         private double[][] Matrix => Matrices[0];
+        private IEnumerable<double>[] M;
 
         public TwoPlayerZeroSum(double[][] matrix)
             : base(matrix, NegativeMatrix(matrix))
-        { }
+        {
+            M = new IEnumerable<double>[2];
+            M[0] = matrix[0];
+            M[1] = matrix[1];
+        }
+
+        public TwoPlayerZeroSum(IEnumerable<double>[] matrix)
+        {
+            M = matrix;
+        }
 
         // Using static instead of constructor so we don't have to parse the matrix twice
         public static TwoPlayerZeroSum Parse(string matrix)
@@ -125,9 +136,51 @@ namespace GameSolver.NET.Matrix.Solvers
             return topLineIntersections[0];
         }
 
+        public Point2D StrategyForPlayerEn(int player)
+        {
+            var x = BestResponses().AsParallel()
+                .SelectMany(brf1 => BestResponses()
+                    .Where(b => b != brf1)
+                    .Select(brf1.IntersectWith)
+                    .Where(intersect => intersect != null)
+                    .Select(intersect => intersect.Value)
+                    .Where(intersect => !BestResponses().Any(b => b.Evaluate(intersect.X) > intersect.Y)))
+                .OrderBy(p => p.Y);
+
+            try
+            {
+                return x.First();
+            }
+            catch (InvalidOperationException)
+            {
+                // Min point lies on 0 or 1
+                var y0 = BestResponses().AsParallel()
+                    .Select(b => b.Evaluate(0))
+                    .Max();
+                var y1 = BestResponses().AsParallel()
+                    .Select(b => b.Evaluate(1))
+                    .Max();
+
+                return y0 > y1 ? new Point2D(0, y0) : new Point2D(1, y1);
+            }
+        }
+
         private double BestResponse(double x1, int p2Index)
         {
             return (Matrices[0][0][p2Index] - Matrices[0][1][p2Index]) * x1 + Matrices[0][1][p2Index];
+        }
+
+        private IEnumerable<Line2D> BestResponses()
+        {
+            using (var e1 = M[0].GetEnumerator())
+            using (var e2 = M[1].GetEnumerator())
+            {
+                while (e1.MoveNext() & e2.MoveNext())
+                {
+                    yield return new Line2D(new Point2D(0, e2.Current),
+                        new Point2D(1, e1.Current));
+                }
+            }
         }
 
         private static double[][] NegativeMatrix(IReadOnlyList<double[]> matrix)

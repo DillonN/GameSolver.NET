@@ -11,6 +11,9 @@ namespace GameSolver.NET.Matrix.Solvers
         public int Player1Actions { get; private set; }
         public int Player2Actions { get; private set; }
 
+        protected TwoPlayerSolver()
+        { }
+
         public TwoPlayerSolver(double[][] matrix1, double[][] matrix2)
             : base(matrix1, matrix2)
         {

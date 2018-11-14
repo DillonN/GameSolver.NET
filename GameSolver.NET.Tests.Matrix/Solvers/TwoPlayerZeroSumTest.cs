@@ -26,6 +26,9 @@ namespace GameSolver.NET.Tests.Matrix.Solvers
 
             Assert.AreEqual(s.X, 4d / 7, Delta);
             Assert.AreEqual(s.Y, 20d / 7, Delta);
+
+            var se = t.StrategyForPlayerEn(0);
+            Assert.AreEqual(s, se);
         }
     }
 }
