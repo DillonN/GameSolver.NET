@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using GameSolver.NET.Common;
+﻿using GameSolver.NET.Common;
 using GameSolver.NET.Extensions;
-using GameSolver.NET.Matrix.Models;
 using MathNet.Spatial.Euclidean;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GameSolver.NET.Matrix.Solvers
 {
