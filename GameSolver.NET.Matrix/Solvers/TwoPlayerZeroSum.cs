@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using GameSolver.NET.Common;
 using GameSolver.NET.Extensions;
+using GameSolver.NET.Matrix.Models;
 using MathNet.Spatial.Euclidean;
 
 namespace GameSolver.NET.Matrix.Solvers
@@ -138,13 +140,20 @@ namespace GameSolver.NET.Matrix.Solvers
 
         public Point2D StrategyForPlayerEn(int player)
         {
-            var x = BestResponses().AsParallel()
-                .SelectMany(brf1 => BestResponses()
+            var x = BestResponses()
+                .AsParallel()
+                .SelectMany(brf1 => 
+                    BestResponses(brf1)
                     .Where(b => b != brf1)
                     .Select(brf1.IntersectWith)
                     .Where(intersect => intersect != null)
                     .Select(intersect => intersect.Value)
-                    .Where(intersect => !BestResponses().Any(b => b.Evaluate(intersect.X) > intersect.Y)))
+                    .Where(intersect => 
+                        !BestResponses()
+                        .Where(b => b != brf1)
+                        .Any(b => b.GetYForX(intersect.X) > intersect.Y)
+                    )
+                )
                 .OrderBy(p => p.Y);
 
             try
@@ -154,11 +163,13 @@ namespace GameSolver.NET.Matrix.Solvers
             catch (InvalidOperationException)
             {
                 // Min point lies on 0 or 1
-                var y0 = BestResponses().AsParallel()
-                    .Select(b => b.Evaluate(0))
+                var y0 = BestResponses()
+                    .AsParallel()
+                    .Select(b => b.GetYForX(0))
                     .Max();
-                var y1 = BestResponses().AsParallel()
-                    .Select(b => b.Evaluate(1))
+                var y1 = BestResponses()
+                    .AsParallel()
+                    .Select(b => b.GetYForX(1))
                     .Max();
 
                 return y0 > y1 ? new Point2D(0, y0) : new Point2D(1, y1);
@@ -170,15 +181,24 @@ namespace GameSolver.NET.Matrix.Solvers
             return (Matrices[0][0][p2Index] - Matrices[0][1][p2Index]) * x1 + Matrices[0][1][p2Index];
         }
 
-        private IEnumerable<Line2D> BestResponses()
+        private IEnumerable<Line2D> BestResponses(Line2D? start = null)
         {
+            var started = !start.HasValue;
             using (var e1 = M[0].GetEnumerator())
             using (var e2 = M[1].GetEnumerator())
             {
                 while (e1.MoveNext() & e2.MoveNext())
                 {
-                    yield return new Line2D(new Point2D(0, e2.Current),
+                    var line = new Line2D(new Point2D(0, e2.Current),
                         new Point2D(1, e1.Current));
+                    if (!started && line == start)
+                    {
+                        started = true;
+                    }
+                    else
+                    {
+                        yield return line;
+                    }
                 }
             }
         }

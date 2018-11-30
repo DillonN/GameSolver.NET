@@ -35,12 +35,12 @@ namespace GameSolver.NET
                     tse += se.Elapsed;
 
                     s.Restart();
-                    t.StrategyForPlayer(0);
+                    //t.StrategyForPlayer(0);
                     s.Stop();
                     ts += s.Elapsed;
                 }
 
-                Console.WriteLine($"Length {length} completed in {tse} (enum) {ts} (array)");
+                Console.WriteLine($"Length {length} completed in {tse / 10} (enum) {ts / 10} (array)");
             }
                 
             Console.ReadKey();
