@@ -20,8 +20,18 @@ namespace GameSolver.NET.Tests.Matrix.Data
         public const string TestGame4 = @"-1,1
 1,-1";
 
-        public const string TestGame5 = @"4,0,-1
-0,-1,3
-1,2,1";
+        public const string TestGame5 = @"0,-1,3
+1,0,0
+3,4,1";
+
+        public const string TestGame6 = @"1,4,2,3
+5,2,-1,2
+2,0,3,1";
+
+        public const string TestGame7 = @"1,-3
+-3,-2";
+
+        public const string TestGame8 = @"-1,1,-3
+-3,-5,3";
     }
 }

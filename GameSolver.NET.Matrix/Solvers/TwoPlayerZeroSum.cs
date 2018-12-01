@@ -61,40 +61,72 @@ namespace GameSolver.NET.Matrix.Solvers
             return cost;
         }
         
-        public TwoPlayerSolution MinMaxSolution()
+        public IEnumerable<TwoPlayerSolution> MinMaxSolution()
         {
-            var p1Action = 0;
+            var p1Actions = new List<int>();
             var p1Security = double.MaxValue;
             for (var i = 0; i < P1Actions; i++)
             {
                 var max = Matrix[i].Max();
-                if (max < p1Security)
+                if (max == p1Security)
                 {
-                    p1Action = i;
+                    p1Actions.Add(i);
+                }
+                else if (max < p1Security)
+                {
+                    p1Actions.Clear();
+                    p1Actions.Add(i);
                     p1Security = max;
                 }
             }
 
 
-            var p2Action = 0;
+            var p2Actions = new List<int>();
             var p2Security = double.MinValue;
             for (var i = 0; i < P2Actions; i++)
             {
                 var min = Matrix.Min(c => c[i]);
 
-                if (min > p2Security)
+                if (min == p2Security)
                 {
-                    p2Action = i;
+                    p2Actions.Add(i);
+                }
+                else if (min > p2Security)
+                {
+                    p2Actions.Clear();
+                    p2Actions.Add(i);
                     p2Security = min;
                 }
             }
 
-            var result = Matrix[p1Action][p2Action];
+            foreach (var p1Action in p1Actions)
+            {
+                foreach (var p2Action in p2Actions)
+                {
+                    var result = Matrix[p1Action][p2Action];
 
-            var saddle = Matrix[p1Action].Max() <= result && Matrix.Min(c => c[p2Action]) >= result;
-            
+                    yield return new TwoPlayerSolution(p1Action + 1, p2Action + 1, p1Security, p2Security, result);
+                }
+            }
+        }
 
-            return new TwoPlayerSolution(p1Action + 1, p2Action + 1, p1Security, p2Security, result, saddle);
+        public TwoPlayerSolution GetMixedSolution()
+        {
+            var p1 = StrategyForPlayerEn(1);
+            double? p2x = null;
+            double? p2y = null;
+            double? result = null;
+            if (P2Actions == 2)
+            {
+                var p2 = StrategyForPlayerEn(2);
+                p2x = p2.X;
+                p2y = p2.Y;
+
+                result = Matrix[0][0] * p1.X * p2x + Matrix[1][0] * (1 - p1.X) * p2x +
+                         Matrix[0][1] * p1.X * (1 - p2x) + Matrix[1][1] * (1 - p1.X) * (1 - p2x);
+            }
+
+            return new TwoPlayerSolution(p1.X, p2x, p1.Y, p2y, result);
         }
 
         public Point2D StrategyForPlayer(int player)
@@ -167,16 +199,16 @@ namespace GameSolver.NET.Matrix.Solvers
 
         public Point2D StrategyForPlayerEn(int player)
         {
-            var x = BestResponses()
+            var x = BestResponses(player)
                 .AsParallel()
                 .SelectMany(brf1 => 
-                    BestResponses(brf1)
+                    BestResponses(player, brf1)
                     //.Where(b => b != brf1)
                     .Select(brf1.IntersectWith)
                     .Where(intersect => intersect != null)
                     .Select(intersect => intersect.Value)
                     .Where(intersect => 
-                        !BestResponses()
+                        !BestResponses(player)
                         .Where(b => b != brf1)
                         .Any(b => b.GetYForX(intersect.X) > intersect.Y)
                     )
@@ -190,11 +222,11 @@ namespace GameSolver.NET.Matrix.Solvers
             catch (InvalidOperationException)
             {
                 // Min point lies on 0 or 1
-                var y0 = BestResponses()
+                var y0 = BestResponses(player)
                     .AsParallel()
                     .Select(b => b.GetYForX(0))
                     .Max();
-                var y1 = BestResponses()
+                var y1 = BestResponses(player)
                     .AsParallel()
                     .Select(b => b.GetYForX(1))
                     .Max();
@@ -208,8 +240,20 @@ namespace GameSolver.NET.Matrix.Solvers
             return (Matrices[0][0][p2Index] - Matrices[0][1][p2Index]) * x1 + Matrices[0][1][p2Index];
         }
 
-        private IEnumerable<Line2D> BestResponses(Line2D? start = null)
+        private IEnumerable<Line2D> BestResponses(int player, Line2D? start = null)
         {
+            if (player > 2 || player < 1)
+                throw new ArgumentOutOfRangeException();
+            if (player == 2)
+            {
+                if (P2Actions != 2)
+                    throw new InvalidOperationException();
+
+                yield return new Line2D(new Point2D(0, -Matrix[1][0]), new Point2D(1, -Matrix[0][0]));
+                yield return new Line2D(new Point2D(0, -Matrix[1][1]), new Point2D(1, -Matrix[0][1]));
+                yield break;
+            }
+
             var started = !start.HasValue;
             using (var e1 = Matrix[0].GetEnumerator())
             using (var e2 = Matrix[1].GetEnumerator())
