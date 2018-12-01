@@ -10,6 +10,8 @@ namespace GameSolver.NET.Tests.Matrix.Solvers
     [TestClass]
     public class TwoPlayerTest
     {
+        private const double Delta = 0.00001;
+
         [TestMethod]
         public void TestGame1()
         {
@@ -64,6 +66,23 @@ namespace GameSolver.NET.Tests.Matrix.Solvers
             {
                 Assert.IsTrue(first < x);
             }
+        }
+
+        [TestMethod]
+        public void TestGame3()
+        {
+            var t = new TwoPlayerSolver(TwoPlayerData.TestGame3A, TwoPlayerData.TestGame3B);
+
+            var s = t.GetMixedSolution();
+
+            Assert.AreEqual(2d / 9, s.P1Action1);
+            Assert.AreEqual(7d / 9, s.P1Action2);
+
+            Assert.AreEqual(3d / 14, s.P2Action1);
+            Assert.AreEqual(11d / 14, s.P2Action2);
+
+            Assert.AreEqual(4d / 7, s.P1Result, Delta);
+            Assert.AreEqual(-1d / 3, s.P2Result, Delta);
         }
 
         [TestMethod]

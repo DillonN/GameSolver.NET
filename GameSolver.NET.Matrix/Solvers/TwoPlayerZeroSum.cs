@@ -61,6 +61,7 @@ namespace GameSolver.NET.Matrix.Solvers
             return cost;
         }
         
+        // O(n * m)
         public IEnumerable<TwoPlayerZSSolution> MinMaxSolution()
         {
             var p1Actions = new List<int>();
@@ -122,8 +123,7 @@ namespace GameSolver.NET.Matrix.Solvers
                 p2x = p2.X;
                 p2y = p2.Y;
 
-                result = Matrix[0][0] * p1.X * p2x + Matrix[1][0] * (1 - p1.X) * p2x +
-                         Matrix[0][1] * p1.X * (1 - p2x) + Matrix[1][1] * (1 - p1.X) * (1 - p2x);
+                result = CostForMixed(Matrix, p1.X, p2x.Value);
             }
 
             return new TwoPlayerZSSolution(p1.X, p2x, p1.Y, p2y, result);
@@ -197,8 +197,12 @@ namespace GameSolver.NET.Matrix.Solvers
             return topLineIntersections[0];
         }
 
+        // O(n^3)
         public Point2D StrategyForPlayerEn(int player)
         {
+            // Only valid for n x 2 matrices
+            if (P1Actions > 2)
+                throw new InvalidOperationException("Graphical method only available for nx2 matrices");
             var x = BestResponses(player)
                 .AsParallel()
                 .SelectMany(brf1 => 

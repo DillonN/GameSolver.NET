@@ -5,11 +5,11 @@ using System.Text;
 
 namespace GameSolver.NET.Matrix.Solvers
 {
-    public abstract class Solver
+    public abstract class MatrixSolver
     {
         protected double[][][] Matrices;
 
-        protected Solver(params double[][][] matrices)
+        protected MatrixSolver(params double[][][] matrices)
         {
             // Check inner arrays are rectangular with same dimensions
             
@@ -20,14 +20,14 @@ namespace GameSolver.NET.Matrix.Solvers
             Matrices = matrices;
         }
 
-        protected Solver(params string[] matrices)
+        protected MatrixSolver(params string[] matrices)
             : this((IEnumerable<string>) matrices)
         { }
 
-        protected Solver()
+        protected MatrixSolver()
         { }
 
-        protected Solver(IEnumerable<string> matrices)
+        protected MatrixSolver(IEnumerable<string> matrices)
         {
             Matrices = matrices.Select(ParseMatrix).ToArray();
         }

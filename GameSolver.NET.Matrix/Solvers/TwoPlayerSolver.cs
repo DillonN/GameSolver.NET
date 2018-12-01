@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using GameSolver.NET.Matrix.Models;
 
 namespace GameSolver.NET.Matrix.Solvers
 {
-    public class TwoPlayerSolver : Solver
+    public class TwoPlayerSolver : MatrixSolver
     {
         private IReadOnlyList<IReadOnlyList<double>> P1Matrix => Matrices[0];
         private IReadOnlyList<IReadOnlyList<double>> P2Matrix => Matrices[1];
@@ -26,6 +27,7 @@ namespace GameSolver.NET.Matrix.Solvers
             CheckArrays();
         }
 
+        // O(n * m)
         public IEnumerable<TwoPlayerSolution> BruteForceSolutions()
         {
             var ret = P1Matrix
@@ -35,6 +37,28 @@ namespace GameSolver.NET.Matrix.Solvers
             ret = ret.Where(s => !P1Matrix.Any(r => r[s.P2Action - 1] < s.P1Result));
             ret = ret.Where(s => !P2Matrix[s.P1Action - 1].Any(v => v < s.P2Result));
             return ret;
+        }
+
+        public P2MixedSolution GetMixedSolution()
+        {
+            if (P1Actions != 2 || P2Actions != 2)
+                throw new InvalidOperationException("Can only get mixed solutions for 2x2 matrices!");
+
+            var a = P1Matrix[0][0] - P1Matrix[0][1] - P1Matrix[1][0] + P1Matrix[1][1];
+            var c1 = P1Matrix[1][1] - P1Matrix[0][1];
+            var c2 = P1Matrix[1][1] - P1Matrix[1][0];
+
+            var b = P2Matrix[0][0] - P2Matrix[0][1] - P2Matrix[1][0] + P2Matrix[1][1];
+            var d1 = P2Matrix[1][1] - P2Matrix[0][1];
+            var d2 = P2Matrix[1][1] - P2Matrix[1][0];
+
+            var p1A1 = d2 / b;
+            var p2A1 = c1 / a;
+
+            var p1Result = CostForMixed(P1Matrix, p1A1, p2A1);
+            var p2Result = CostForMixed(P2Matrix, p1A1, p2A1);
+
+            return new P2MixedSolution(p1A1, p2A1, p1Result, p2Result);
         }
 
         private void CheckArrays()
@@ -57,6 +81,12 @@ namespace GameSolver.NET.Matrix.Solvers
             {
                 throw new ArgumentException("Matrices must be rectangular!");
             }
+        }
+
+        protected static double CostForMixed(IReadOnlyList<IReadOnlyList<double>> matrix, double p1A1, double p2A1)
+        {
+            return matrix[0][0] * p1A1 * p2A1 + matrix[1][0] * (1 - p1A1) * p2A1 +
+                   matrix[0][1] * p1A1 * (1 - p2A1) + matrix[1][1] * (1 - p1A1) * (1 - p2A1);
         }
     }
 }

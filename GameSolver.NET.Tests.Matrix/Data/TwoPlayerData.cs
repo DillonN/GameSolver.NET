@@ -22,6 +22,11 @@ namespace GameSolver.NET.Tests.Matrix.Data
 0,4,0
 0,1,0";
 
+        public const string TestGame3A = @"10,-2
+-1,1";
+        public const string TestGame3B = @"-5,2
+1,-1";
+
         public const string ShouldThrowNotSame1 = @"1,2,3
 1,2,3";
 
