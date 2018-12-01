@@ -26,6 +26,17 @@ namespace GameSolver.NET.Matrix.Solvers
             CheckArrays();
         }
 
+        public IEnumerable<TwoPlayerSolution> BruteForceSolutions()
+        {
+            var ret = P1Matrix
+                .SelectMany((c, i) => c
+                    .Select((d, j) => new TwoPlayerSolution(i + 1, j + 1, d, P2Matrix[i][j])));
+
+            ret = ret.Where(s => !P1Matrix.Any(r => r[s.P2Action - 1] < s.P1Result));
+            ret = ret.Where(s => !P2Matrix[s.P1Action - 1].Any(v => v < s.P2Result));
+            return ret;
+        }
+
         private void CheckArrays()
         {
             Debug.Assert(Matrices.Length == 2);

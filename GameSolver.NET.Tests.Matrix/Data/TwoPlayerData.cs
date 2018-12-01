@@ -6,6 +6,22 @@ namespace GameSolver.NET.Tests.Matrix.Data
 {
     internal static class TwoPlayerData
     {
+        public const string TestGame1A = @"5,0
+15,1";
+        public const string TestGame1B = @"5,15
+0,1";
+
+        public const string TestGame2A = @"8,-4,8
+6,1,6
+12,0,0
+0,0,12
+0,4,0";
+        public const string TestGame2B = @"4,0,0
+0,0,4
+0,4,0
+0,4,0
+0,1,0";
+
         public const string ShouldThrowNotSame1 = @"1,2,3
 1,2,3";
 
