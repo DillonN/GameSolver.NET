@@ -30,5 +30,53 @@ namespace GameSolver.NET.Tests.Matrix.Solvers
             var se = t.StrategyForPlayerEn(0);
             Assert.AreEqual(s, se);
         }
+
+        [TestMethod]
+        public void TestGame2()
+        {
+            var t = TwoPlayerZeroSum.Parse(TwoPlayerZeroSumData.TestGame2);
+
+            var s = t.MinMaxSolution();
+
+            Assert.AreEqual(1, s.Result);
+            Assert.AreEqual(3, s.P1Action);
+            Assert.AreEqual(2, s.P1Security);
+            Assert.AreEqual(1, s.P2Action);
+            Assert.AreEqual(0, s.P2Security);
+            Assert.IsFalse(s.IsSaddle);
+        }
+
+        [TestMethod]
+        public void TestGame3()
+        {
+            var t = TwoPlayerZeroSum.Parse(TwoPlayerZeroSumData.TestGame3);
+
+            var s = t.MinMaxSolution();
+
+            Assert.AreEqual(2, s.Result);
+            Assert.AreEqual(2, s.P1Action);
+            Assert.AreEqual(2, s.P1Security);
+            Assert.AreEqual(2, s.P2Action);
+            Assert.AreEqual(2, s.P2Security);
+            Assert.IsTrue(s.IsSaddle);
+        }
+
+        [TestMethod]
+        public void TestGame4()
+        {
+            var t = TwoPlayerZeroSum.Parse(TwoPlayerZeroSumData.TestGame4);
+
+            var s = t.MinMaxSolution();
+
+            Assert.IsFalse(s.IsSaddle);
+        }
+
+        [TestMethod]
+        public void TestGame5()
+        {
+            var t = TwoPlayerZeroSum.Parse(TwoPlayerZeroSumData.TestGame5);
+
+            var s = t.MinMaxSolution();
+        }
     }
 }

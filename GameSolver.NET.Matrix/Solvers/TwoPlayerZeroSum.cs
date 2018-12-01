@@ -9,20 +9,14 @@ namespace GameSolver.NET.Matrix.Solvers
 {
     public class TwoPlayerZeroSum : TwoPlayerSolver
     {
-        private double[][] Matrix => Matrices[0];
-        private IEnumerable<double>[] M;
+        private IReadOnlyList<IReadOnlyList<double>> Matrix => Matrices[0];
 
         public TwoPlayerZeroSum(double[][] matrix)
             : base(matrix, NegativeMatrix(matrix))
         {
-            M = new IEnumerable<double>[2];
-            M[0] = matrix[0];
-            M[1] = matrix[1];
-        }
-
-        public TwoPlayerZeroSum(IEnumerable<double>[] matrix)
-        {
-            M = matrix;
+            //_matrix = new IEnumerable<double>[2];
+            //_matrix[0] = matrix[0];
+            //_matrix[1] = matrix[1];
         }
 
         // Using static instead of constructor so we don't have to parse the matrix twice
@@ -35,9 +29,9 @@ namespace GameSolver.NET.Matrix.Solvers
         {
             if (player > 1)
                 throw new ArgumentOutOfRangeException(nameof(player));
-            if (u1 > Player1Actions - 1)
+            if (u1 > P1Actions - 1)
                 throw new ArgumentOutOfRangeException(nameof(u1));
-            if (u2 > Player2Actions - 1)
+            if (u2 > P2Actions - 1)
                 throw new ArgumentOutOfRangeException(nameof(u2));
 
             return Matrices[player][u1][u2];
@@ -45,9 +39,9 @@ namespace GameSolver.NET.Matrix.Solvers
 
         public double CostForMixedActions(int player, double[] x1, double[] x2)
         {
-            if (x1.Length > Player1Actions)
+            if (x1.Length > P1Actions)
                 throw new ArgumentOutOfRangeException(nameof(x1));
-            if (x2.Length > Player2Actions)
+            if (x2.Length > P2Actions)
                 throw new ArgumentOutOfRangeException(nameof(x2));
 
             if (x1.Any(d => d > 1 | d < 0))
@@ -66,16 +60,52 @@ namespace GameSolver.NET.Matrix.Solvers
 
             return cost;
         }
+        
+        public TwoPlayerSolution MinMaxSolution()
+        {
+            var p1Action = 0;
+            var p1Security = double.MaxValue;
+            for (var i = 0; i < P1Actions; i++)
+            {
+                var max = Matrix[i].Max();
+                if (max < p1Security)
+                {
+                    p1Action = i;
+                    p1Security = max;
+                }
+            }
+
+
+            var p2Action = 0;
+            var p2Security = double.MinValue;
+            for (var i = 0; i < P2Actions; i++)
+            {
+                var min = Matrix.Min(c => c[i]);
+
+                if (min > p2Security)
+                {
+                    p2Action = i;
+                    p2Security = min;
+                }
+            }
+
+            var result = Matrix[p1Action][p2Action];
+
+            var saddle = Matrix[p1Action].Max() <= result && Matrix.Min(c => c[p2Action]) >= result;
+            
+
+            return new TwoPlayerSolution(p1Action + 1, p2Action + 1, p1Security, p2Security, result, saddle);
+        }
 
         public Point2D StrategyForPlayer(int player)
         {
             // Find best response funcs
-            var brfs = new Line2D[Player2Actions];
+            var brfs = new Line2D[P2Actions];
 
             var maxIndex = 0;
             var maxValue = double.MinValue;
 
-            for (var i = 0; i < Player2Actions; i++)
+            for (var i = 0; i < P2Actions; i++)
             {
                 var p1 = new Point2D(0, BestResponse(0, i));
                 var p2 = new Point2D(1, BestResponse(1, i));
@@ -141,7 +171,7 @@ namespace GameSolver.NET.Matrix.Solvers
                 .AsParallel()
                 .SelectMany(brf1 => 
                     BestResponses(brf1)
-                    .Where(b => b != brf1)
+                    //.Where(b => b != brf1)
                     .Select(brf1.IntersectWith)
                     .Where(intersect => intersect != null)
                     .Select(intersect => intersect.Value)
@@ -181,8 +211,8 @@ namespace GameSolver.NET.Matrix.Solvers
         private IEnumerable<Line2D> BestResponses(Line2D? start = null)
         {
             var started = !start.HasValue;
-            using (var e1 = M[0].GetEnumerator())
-            using (var e2 = M[1].GetEnumerator())
+            using (var e1 = Matrix[0].GetEnumerator())
+            using (var e2 = Matrix[1].GetEnumerator())
             {
                 while (e1.MoveNext() & e2.MoveNext())
                 {
