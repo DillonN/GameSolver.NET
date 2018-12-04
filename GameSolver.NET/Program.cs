@@ -32,7 +32,7 @@ namespace GameSolver.NET
                     var t = new TwoPlayerZeroSum(m);
 
                     se.Restart();
-                    t.StrategyForPlayerEn(0);
+                    t.StrategyForPlayerEn(1);
                     se.Stop();
                     tse += se.Elapsed;
 

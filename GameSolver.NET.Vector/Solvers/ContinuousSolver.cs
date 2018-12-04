@@ -18,12 +18,12 @@ namespace GameSolver.NET.Vector.Solvers
             _upperBound = upper;
         }
 
-        public P2MixedSolution Solve()
-        {
-            var dj1 = Differentiate.PartialDerivativeFunc(_costFunc, 0, 1);
-            var dj2 = Differentiate.PartialDerivativeFunc(_costFunc, 1, 1);
+        //public P2MixedSolution Solve()
+        //{
+        //    var dj1 = Differentiate.PartialDerivativeFunc(_costFunc, 0, 1);
+        //    var dj2 = Differentiate.PartialDerivativeFunc(_costFunc, 1, 1);
                 
-            var min1 = FindMinimum.OfFunctionConstrained()
-        }
+        //    var min1 = FindMinimum.OfFunctionConstrained()
+        //}
     }
 }
