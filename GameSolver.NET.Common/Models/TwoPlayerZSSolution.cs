@@ -1,4 +1,4 @@
-﻿namespace GameSolver.NET.Matrix
+﻿namespace GameSolver.NET.Common.Models
 {
     public class TwoPlayerZSSolution
     {

@@ -1,6 +1,6 @@
-﻿using GameSolver.NET.Matrix.Models;
+﻿using GameSolver.NET.Common.Models;
 
-namespace GameSolver.NET.Matrix
+namespace GameSolver.NET.Common
 {
     internal static class P2CompareHelper
     {

@@ -1,7 +1,6 @@
-﻿using GameSolver.NET.Matrix.Models;
-using System;
+﻿using System;
 
-namespace GameSolver.NET.Matrix
+namespace GameSolver.NET.Common.Models
 {
     public readonly struct TwoPlayerSolution : IP2Solution, IEquatable<TwoPlayerSolution>
     {

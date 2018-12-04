@@ -4,6 +4,7 @@ using MathNet.Spatial.Euclidean;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using GameSolver.NET.Common.Models;
 
 namespace GameSolver.NET.Matrix.Solvers
 {

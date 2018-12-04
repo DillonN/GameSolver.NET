@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
-using GameSolver.NET.Matrix.Models;
+using GameSolver.NET.Common.Models;
 
 namespace GameSolver.NET.Matrix.Solvers
 {

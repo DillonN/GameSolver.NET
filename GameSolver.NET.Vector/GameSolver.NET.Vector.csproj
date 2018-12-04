@@ -2,7 +2,6 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -14,12 +13,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MathNet.Spatial" Version="0.5.0-beta04" />
+    <PackageReference Include="MathNet.Numerics" Version="4.7.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\GameSolver.NET.Common\GameSolver.NET.Common.csproj" />
-    <ProjectReference Include="..\GameSolver.NET.Extensions\GameSolver.NET.Extensions.csproj" />
   </ItemGroup>
 
 </Project>

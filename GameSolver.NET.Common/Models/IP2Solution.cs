@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GameSolver.NET.Matrix.Models
+namespace GameSolver.NET.Common.Models
 {
     public interface IP2Solution : IComparable<IP2Solution>, IComparable
     {

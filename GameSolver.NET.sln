@@ -15,7 +15,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameSolver.NET.Tests.Matrix
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameSolver.NET.Tests.Common", "GameSolver.NET.Tests.Common\GameSolver.NET.Tests.Common.csproj", "{EDA741A6-EF58-445B-8E6F-076FC8BB49AA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameSolver.NET.Extensions", "GameSolver.NET.Extensions\GameSolver.NET.Extensions.csproj", "{73E556FB-A034-46D1-8854-A9AC1054EE96}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameSolver.NET.Extensions", "GameSolver.NET.Extensions\GameSolver.NET.Extensions.csproj", "{73E556FB-A034-46D1-8854-A9AC1054EE96}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameSolver.NET.Vector", "GameSolver.NET.Vector\GameSolver.NET.Vector.csproj", "{5FED0A1B-ECDD-4293-994D-A46E99422399}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameSolver.NET.Tests.Vector", "GameSolver.NET.Tests.Vector\GameSolver.NET.Tests.Vector.csproj", "{9482DA4C-D92E-4896-87C9-C0AAFEA56145}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +51,14 @@ Global
 		{73E556FB-A034-46D1-8854-A9AC1054EE96}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{73E556FB-A034-46D1-8854-A9AC1054EE96}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{73E556FB-A034-46D1-8854-A9AC1054EE96}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FED0A1B-ECDD-4293-994D-A46E99422399}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FED0A1B-ECDD-4293-994D-A46E99422399}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FED0A1B-ECDD-4293-994D-A46E99422399}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FED0A1B-ECDD-4293-994D-A46E99422399}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9482DA4C-D92E-4896-87C9-C0AAFEA56145}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9482DA4C-D92E-4896-87C9-C0AAFEA56145}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9482DA4C-D92E-4896-87C9-C0AAFEA56145}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9482DA4C-D92E-4896-87C9-C0AAFEA56145}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -54,6 +66,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{7BA3A019-7CE7-44D7-BB02-2F0BA1154787} = {22190D55-1BC8-4267-9FEC-F247CAB163D3}
 		{EDA741A6-EF58-445B-8E6F-076FC8BB49AA} = {22190D55-1BC8-4267-9FEC-F247CAB163D3}
+		{9482DA4C-D92E-4896-87C9-C0AAFEA56145} = {22190D55-1BC8-4267-9FEC-F247CAB163D3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6F673492-8C9A-466E-BB06-89358E79BA9E}

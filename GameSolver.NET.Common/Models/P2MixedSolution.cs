@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GameSolver.NET.Matrix.Models
+namespace GameSolver.NET.Common.Models
 {
     public readonly struct P2MixedSolution : IP2Solution, IEquatable<P2MixedSolution>
     {

@@ -5,6 +5,8 @@ using System.Linq;
 using GameSolver.NET.Matrix.Solvers;
 using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities;
 
+#nullable enable
+
 namespace GameSolver.NET
 {
     internal class Program

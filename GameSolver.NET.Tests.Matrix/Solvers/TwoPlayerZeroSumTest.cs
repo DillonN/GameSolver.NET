@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using GameSolver.NET.Matrix.Solvers;
+﻿using GameSolver.NET.Matrix.Solvers;
 using GameSolver.NET.Tests.Matrix.Data;
-using MathNet.Spatial.Euclidean;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Linq;
 
 namespace GameSolver.NET.Tests.Matrix.Solvers
 {
