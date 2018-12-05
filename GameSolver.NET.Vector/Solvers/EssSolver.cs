@@ -19,7 +19,7 @@ namespace GameSolver.NET.Vector.Solvers
                 throw new ArgumentException("Must be a square matrix!", nameof(matrix));
         }
 
-        public IEnumerable<IP2Solution> GetEquilibriums()
+        public IEnumerable<TwoPlayerSolution> GetEquilibriums()
         {
             var nes = _2PSolver.BruteForceSolutions();
             //if (_2PSolver.P1Actions == 2)
@@ -32,7 +32,8 @@ namespace GameSolver.NET.Vector.Solvers
                 var ess = true;
                 for (var i = 0; i < _2PSolver.P1Actions; i++)
                 {
-                    if (_2PSolver.P1Matrix[i][ne.P1Action] == ne.P1Result &&
+                    if (i != ne.P1Action - 1 &&
+                        _2PSolver.P1Matrix[i][ne.P1Action - 1] == ne.P1Result &&
                         _2PSolver.P1Matrix[ne.P1Action - 1][i] >= _2PSolver.P1Matrix[i][i])
                     {
                         ess = false;

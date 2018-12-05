@@ -15,6 +15,13 @@ namespace GameSolver.NET.Tests.Vector
         {
             var t = new EssSolver(Matrix1);
             var ess = t.GetEquilibriums().ToList();
+
+            Assert.AreEqual(2, ess.Count);
+
+            foreach (var e in ess)
+            {
+                Assert.IsTrue((e.P1Action == 1 && e.P2Action == 1) || (e.P1Action == 2 && e.P2Action == 2));
+            }
         }
     }
 }
