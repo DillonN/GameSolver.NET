@@ -9,8 +9,8 @@ namespace GameSolver.NET.Matrix.Solvers
 {
     public class TwoPlayerSolver : MatrixSolver
     {
-        private IReadOnlyList<IReadOnlyList<double>> P1Matrix => Matrices[0];
-        private IReadOnlyList<IReadOnlyList<double>> P2Matrix => Matrices[1];
+        public IReadOnlyList<IReadOnlyList<double>> P1Matrix => Matrices[0];
+        public IReadOnlyList<IReadOnlyList<double>> P2Matrix => Matrices[1];
 
         public int P1Actions { get; private set; }
         public int P2Actions { get; private set; }
@@ -30,16 +30,21 @@ namespace GameSolver.NET.Matrix.Solvers
         // O(n * m)
         public IEnumerable<TwoPlayerSolution> BruteForceSolutions()
         {
-            var ret = P1Matrix
-                .SelectMany((c, i) => c
-                    .Select((d, j) => new TwoPlayerSolution(i + 1, j + 1, d, P2Matrix[i][j])));
+            var ret = AllOutcomes();
 
             ret = ret.Where(s => !P1Matrix.Any(r => r[s.P2Action - 1] < s.P1Result));
             ret = ret.Where(s => !P2Matrix[s.P1Action - 1].Any(v => v < s.P2Result));
             return ret;
         }
 
-        public P2MixedSolution GetMixedSolution()
+        public IEnumerable<TwoPlayerSolution> AllOutcomes()
+        {
+            return P1Matrix
+                .SelectMany((c, i) => c
+                    .Select((d, j) => new TwoPlayerSolution(i + 1, j + 1, d, P2Matrix[i][j])));
+        }
+
+        public P2MixedSolution Get2x2MixedSolution()
         {
             if (P1Actions != 2 || P2Actions != 2)
                 throw new InvalidOperationException("Can only get mixed solutions for 2x2 matrices!");

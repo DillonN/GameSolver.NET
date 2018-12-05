@@ -7,11 +7,11 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <CodeAnalysisRuleSet>..\GameSolver.NET.Tests.Common\GameSolver.NET.Tests.Common.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>..\GameSolver.NET.Tests.Vector\GameSolver.NET.Tests.Vector.rulese</CodeAnalysisRuleSet>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <CodeAnalysisRuleSet>..\GameSolver.NET.Tests.Common\GameSolver.NET.Tests.Common.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>..\GameSolver.NET.Tests.Vector\GameSolver.NET.Tests.Vector.rulese</CodeAnalysisRuleSet>
     <DefineConstants>TRACE</DefineConstants>
   </PropertyGroup>
 
@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GameSolver.NET.Common\GameSolver.NET.Common.csproj" />
+    <ProjectReference Include="..\GameSolver.NET.Matrix\GameSolver.NET.Matrix.csproj" />
   </ItemGroup>
 
 </Project>

@@ -11,7 +11,7 @@ namespace GameSolver.NET
 {
     internal class Program
     {
-        private static Random r = new Random();
+        private static Random _r = new Random();
 
         private static void Main(string[] args)
         {
@@ -51,7 +51,7 @@ namespace GameSolver.NET
         private static IEnumerable<double> RandomColumns(int amount)
         {
             for (var i = 0; i < amount; i++)
-                yield return r.Next(int.MaxValue);
+                yield return _r.Next(int.MaxValue);
         }
     }
 }

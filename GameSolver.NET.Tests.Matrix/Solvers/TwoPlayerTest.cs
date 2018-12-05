@@ -73,7 +73,7 @@ namespace GameSolver.NET.Tests.Matrix.Solvers
         {
             var t = new TwoPlayerSolver(TwoPlayerData.TestGame3A, TwoPlayerData.TestGame3B);
 
-            var s = t.GetMixedSolution();
+            var s = t.Get2x2MixedSolution();
 
             Assert.AreEqual(2d / 9, s.P1Action1);
             Assert.AreEqual(7d / 9, s.P1Action2);
