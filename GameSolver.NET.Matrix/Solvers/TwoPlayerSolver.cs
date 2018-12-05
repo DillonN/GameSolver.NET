@@ -15,7 +15,8 @@ namespace GameSolver.NET.Matrix.Solvers
         public int P1Actions { get; private set; }
         public int P2Actions { get; private set; }
 
-        public TwoPlayerSolver(double[][] matrix1, double[][] matrix2)
+        public TwoPlayerSolver(IReadOnlyList<IReadOnlyList<double>> matrix1, 
+            IReadOnlyList<IReadOnlyList<double>> matrix2)
             : base(matrix1, matrix2)
         {
             CheckArrays();
@@ -30,18 +31,12 @@ namespace GameSolver.NET.Matrix.Solvers
         // O(n * m)
         public IEnumerable<TwoPlayerSolution> BruteForceSolutions()
         {
-            var ret = AllOutcomes();
-
-            ret = ret.Where(s => !P1Matrix.Any(r => r[s.P2Action - 1] < s.P1Result));
-            ret = ret.Where(s => !P2Matrix[s.P1Action - 1].Any(v => v < s.P2Result));
-            return ret;
-        }
-
-        public IEnumerable<TwoPlayerSolution> AllOutcomes()
-        {
             return P1Matrix
+                .AsParallel()
                 .SelectMany((c, i) => c
-                    .Select((d, j) => new TwoPlayerSolution(i + 1, j + 1, d, P2Matrix[i][j])));
+                    .Select((d, j) => new TwoPlayerSolution(i + 1, j + 1, d, P2Matrix[i][j])))
+                .Where(s => !P1Matrix.Any(r => r[s.P2Action - 1] < s.P1Result))
+                .Where(s => !P2Matrix[s.P1Action - 1].Any(v => v < s.P2Result));
         }
 
         public P2MixedSolution Get2x2MixedSolution()
@@ -74,15 +69,15 @@ namespace GameSolver.NET.Matrix.Solvers
 
             if (P1Actions < 2)
                 throw new ArgumentException("Matrix must be at least 2x2");
-            if (P1Actions != Matrices[1].Length)
+            if (P1Actions != Matrices[1].Count)
                 throw new ArgumentException("Matrices must have same row count!");
 
-            P2Actions = Matrices[0][0].Length;
+            P2Actions = Matrices[0][0].Count;
 
             if (P2Actions < 2)
                 throw new ArgumentException("Matrix must be at least 2x2");
 
-            if (Matrices.Any(matrix => matrix.Any(row => P2Actions != row.Length)))
+            if (Matrices.Any(matrix => matrix.Any(row => P2Actions != row.Count)))
             {
                 throw new ArgumentException("Matrices must be rectangular!");
             }

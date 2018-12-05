@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using GameSolver.NET.Matrix.Solvers;
-using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities;
-
-#nullable enable
+using GameSolver.NET.Common.Models;
 
 namespace GameSolver.NET
 {
@@ -25,14 +23,15 @@ namespace GameSolver.NET
                 var tse = new TimeSpan();
                 for (var j = 0; j < 10; j++)
                 {
-                    var m = new double[2][];
-                    m[0] = RandomColumns(length).ToArray();
-                    m[1] = RandomColumns(length).ToArray();
+                    var m = RandomColumns(length).ToArray();
+                    var n = RandomColumns(length).ToArray();
 
-                    var t = new TwoPlayerZeroSum(m);
+                    var coop = new CooperativePreferenceMatrix(m, n);
+
+                    var t = new TwoPlayerSolver(coop, coop);
 
                     se.Restart();
-                    t.StrategyForPlayerEn(1);
+                    t.BruteForceSolutions().ToList();
                     se.Stop();
                     tse += se.Elapsed;
 
@@ -51,7 +50,7 @@ namespace GameSolver.NET
         private static IEnumerable<double> RandomColumns(int amount)
         {
             for (var i = 0; i < amount; i++)
-                yield return _r.Next(int.MaxValue);
+                yield return _r.NextDouble();
         }
     }
 }

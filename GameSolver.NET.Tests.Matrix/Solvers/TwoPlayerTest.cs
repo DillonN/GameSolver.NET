@@ -1,6 +1,5 @@
 using System;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using GameSolver.NET.Matrix.Solvers;
 using GameSolver.NET.Tests.Matrix.Data;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

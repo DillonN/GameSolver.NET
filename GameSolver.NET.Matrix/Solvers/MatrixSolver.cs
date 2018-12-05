@@ -7,9 +7,9 @@ namespace GameSolver.NET.Matrix.Solvers
 {
     public abstract class MatrixSolver
     {
-        protected double[][][] Matrices;
+        protected IReadOnlyList<IReadOnlyList<double>>[] Matrices;
 
-        protected MatrixSolver(params double[][][] matrices)
+        protected MatrixSolver(params IReadOnlyList<IReadOnlyList<double>>[] matrices)
         {
             // Check inner arrays are rectangular with same dimensions
             
