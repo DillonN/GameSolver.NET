@@ -24,9 +24,6 @@ namespace GameSolver.NET.Matrix.Solvers
             : this((IEnumerable<string>) matrices)
         { }
 
-        protected MatrixSolver()
-        { }
-
         protected MatrixSolver(IEnumerable<string> matrices)
         {
             Matrices = matrices.Select(ParseMatrix).ToArray();

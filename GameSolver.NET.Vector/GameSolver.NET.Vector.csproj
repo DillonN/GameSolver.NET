@@ -7,17 +7,13 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <CodeAnalysisRuleSet>..\GameSolver.NET.Tests.Vector\GameSolver.NET.Tests.Vector.rulese</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet></CodeAnalysisRuleSet>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <CodeAnalysisRuleSet>..\GameSolver.NET.Tests.Vector\GameSolver.NET.Tests.Vector.rulese</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet></CodeAnalysisRuleSet>
     <DefineConstants>TRACE</DefineConstants>
   </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="MathNet.Numerics" Version="4.7.0" />
-  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\GameSolver.NET.Common\GameSolver.NET.Common.csproj" />

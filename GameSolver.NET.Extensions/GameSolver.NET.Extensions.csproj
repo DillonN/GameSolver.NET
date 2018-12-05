@@ -7,15 +7,15 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <CodeAnalysisRuleSet>..\GameSolver.NET.Tests.Vector\GameSolver.NET.Tests.Vector.rulese</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet></CodeAnalysisRuleSet>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <CodeAnalysisRuleSet>..\GameSolver.NET.Tests.Vector\GameSolver.NET.Tests.Vector.rulese</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet></CodeAnalysisRuleSet>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MathNet.Spatial" Version="0.5.0-beta04" />
+    <PackageReference Include="MathNet.Spatial" Version="0.4.0" />
   </ItemGroup>
 
 </Project>
