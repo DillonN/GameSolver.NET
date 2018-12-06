@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28010.2048
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28315.86
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameSolver.NET", "GameSolver.NET\GameSolver.NET.csproj", "{2F218836-8210-45E2-A850-44213DD1597F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameSolver.NET.Core", "GameSolver.NET\GameSolver.NET.Core.csproj", "{2F218836-8210-45E2-A850-44213DD1597F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameSolver.NET.Matrix", "GameSolver.NET.Matrix\GameSolver.NET.Matrix.csproj", "{C4E701B7-FCB1-4843-AD2A-30DF4ADA8863}"
 EndProject
@@ -17,9 +17,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameSolver.NET.Tests.Common
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameSolver.NET.Extensions", "GameSolver.NET.Extensions\GameSolver.NET.Extensions.csproj", "{73E556FB-A034-46D1-8854-A9AC1054EE96}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameSolver.NET.Vector", "GameSolver.NET.Vector\GameSolver.NET.Vector.csproj", "{5FED0A1B-ECDD-4293-994D-A46E99422399}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameSolver.NET.Vector", "GameSolver.NET.Vector\GameSolver.NET.Vector.csproj", "{5FED0A1B-ECDD-4293-994D-A46E99422399}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameSolver.NET.Tests.Vector", "GameSolver.NET.Tests.Vector\GameSolver.NET.Tests.Vector.csproj", "{9482DA4C-D92E-4896-87C9-C0AAFEA56145}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameSolver.NET.Tests.Vector", "GameSolver.NET.Tests.Vector\GameSolver.NET.Tests.Vector.csproj", "{9482DA4C-D92E-4896-87C9-C0AAFEA56145}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameSolver.NET.Benchmarking", "GameSolver.NET.Benchmarking\GameSolver.NET.Benchmarking.csproj", "{B8770225-657B-44EB-8731-943F82C4FAED}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GameSolver.NET", "GameSolver.NET", "{EFDE1C82-3860-406A-B5BD-E4F17A5FD409}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,14 +63,23 @@ Global
 		{9482DA4C-D92E-4896-87C9-C0AAFEA56145}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9482DA4C-D92E-4896-87C9-C0AAFEA56145}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9482DA4C-D92E-4896-87C9-C0AAFEA56145}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8770225-657B-44EB-8731-943F82C4FAED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8770225-657B-44EB-8731-943F82C4FAED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8770225-657B-44EB-8731-943F82C4FAED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8770225-657B-44EB-8731-943F82C4FAED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{C4E701B7-FCB1-4843-AD2A-30DF4ADA8863} = {EFDE1C82-3860-406A-B5BD-E4F17A5FD409}
+		{06138A23-8A65-4FCB-AB53-60DCC79F1494} = {EFDE1C82-3860-406A-B5BD-E4F17A5FD409}
 		{7BA3A019-7CE7-44D7-BB02-2F0BA1154787} = {22190D55-1BC8-4267-9FEC-F247CAB163D3}
 		{EDA741A6-EF58-445B-8E6F-076FC8BB49AA} = {22190D55-1BC8-4267-9FEC-F247CAB163D3}
+		{73E556FB-A034-46D1-8854-A9AC1054EE96} = {EFDE1C82-3860-406A-B5BD-E4F17A5FD409}
+		{5FED0A1B-ECDD-4293-994D-A46E99422399} = {EFDE1C82-3860-406A-B5BD-E4F17A5FD409}
 		{9482DA4C-D92E-4896-87C9-C0AAFEA56145} = {22190D55-1BC8-4267-9FEC-F247CAB163D3}
+		{B8770225-657B-44EB-8731-943F82C4FAED} = {EFDE1C82-3860-406A-B5BD-E4F17A5FD409}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6F673492-8C9A-466E-BB06-89358E79BA9E}

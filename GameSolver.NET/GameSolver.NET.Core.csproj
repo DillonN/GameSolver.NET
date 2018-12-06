@@ -17,7 +17,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GameSolver.NET.Tests.Matrix\GameSolver.NET.Tests.Matrix.csproj" />
+    <ProjectReference Include="..\GameSolver.NET.Benchmarking\GameSolver.NET.Benchmarking.csproj" />
   </ItemGroup>
 
 </Project>

@@ -31,12 +31,28 @@ namespace GameSolver.NET.Matrix.Solvers
         // O(n * m)
         public IEnumerable<TwoPlayerSolution> BruteForceSolutions()
         {
-            return P1Matrix
-                .AsParallel()
-                .SelectMany((c, i) => c
-                    .Select((d, j) => new TwoPlayerSolution(i + 1, j + 1, d, P2Matrix[i][j])))
-                .Where(s => !P1Matrix.Any(r => r[s.P2Action - 1] < s.P1Result))
-                .Where(s => !P2Matrix[s.P1Action - 1].Any(v => v < s.P2Result));
+            var minCols = P2Matrix.AsParallel().Select(r => r.Min()).ToList();
+            var minRows = P1Matrix[0].AsParallel().Select((_, i) => P1Matrix.Select(r => r[i]).Min()).ToList();
+
+            for (var i = 0; i < P1Actions; i++)
+            {
+                for (var j = 0; j < P2Actions; j++)
+                {
+                    if (P1Matrix[i][j] > minRows[j] || P2Matrix[i][j] > minCols[i])
+                    {
+                        continue;
+                    }
+
+                    yield return new TwoPlayerSolution(i + 1, j + 1, P1Matrix[i][j], P2Matrix[i][j]);
+                }
+            }
+
+            //return P1Matrix
+            //    .AsParallel()
+            //    .SelectMany((c, i) => c
+            //        .Select((d, j) => new TwoPlayerSolution(i + 1, j + 1, d, P2Matrix[i][j])))
+            //    .Where(s => s.P1Result <= minRows[s.P2Action - 1])//1Matrix.Any(r => r[s.P2Action - 1] < s.P1Result))
+            //    .Where(s => s.P2Result <= minCols[s.P1Action - 1]);// !P2Matrix[s.P1Action - 1].Any(v => v < s.P2Result));
         }
 
         public P2MixedSolution Get2x2MixedSolution()
