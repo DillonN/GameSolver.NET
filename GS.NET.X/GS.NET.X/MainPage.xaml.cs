@@ -13,12 +13,14 @@ namespace GS.NET.X
         public MainPage()
         {
             InitializeComponent();
-            ResultsLabel.Text = "";
+            ResultsLabel.Text = "blarg";
+            Console.WriteLine("blarg");
             if (true)
             {
-                foreach (var x in Benchmark.Pure())
+                foreach (var x in Benchmark.Mixed(5, 100))
                 {
                     ResultsLabel.Text += "\n" + x;
+                    Console.WriteLine(x);
                 }
             }
         }

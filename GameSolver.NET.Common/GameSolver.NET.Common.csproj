@@ -15,7 +15,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MathNet.Spatial" Version="0.4.0" />
+    <ProjectReference Include="..\MathNet.Spatial\MathNet.Spatial.csproj" />
   </ItemGroup>
 
 </Project>

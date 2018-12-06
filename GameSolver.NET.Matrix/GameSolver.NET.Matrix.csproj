@@ -15,12 +15,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MathNet.Spatial" Version="0.4.0" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\GameSolver.NET.Common\GameSolver.NET.Common.csproj" />
     <ProjectReference Include="..\GameSolver.NET.Extensions\GameSolver.NET.Extensions.csproj" />
+    <ProjectReference Include="..\MathNet.Spatial\MathNet.Spatial.csproj" />
   </ItemGroup>
 
 </Project>

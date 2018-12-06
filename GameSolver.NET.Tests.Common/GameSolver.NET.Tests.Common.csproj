@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GameSolver.NET.Common\GameSolver.NET.Common.csproj" />
+    <ProjectReference Include="..\MathNet.Spatial\MathNet.Spatial.csproj" />
   </ItemGroup>
 
 </Project>
