@@ -6,12 +6,21 @@ using System.Linq;
 
 namespace GameSolver.NET.Matrix.Solvers
 {
+    /// <summary>
+    /// Solver for a two-player bi-matrix game
+    /// </summary>
     public class TwoPlayerSolver : MatrixSolver
     {
         public IReadOnlyList<IReadOnlyList<double>> P1Matrix => Matrices[0];
         public IReadOnlyList<IReadOnlyList<double>> P2Matrix => Matrices[1];
 
+        /// <summary>
+        /// Number of actions available to player 1
+        /// </summary>
         public int P1Actions { get; private set; }
+        /// <summary>
+        /// Number of actions available to player 2
+        /// </summary>
         public int P2Actions { get; private set; }
 
         public TwoPlayerSolver(IReadOnlyList<IReadOnlyList<double>> matrix1, 
@@ -27,6 +36,9 @@ namespace GameSolver.NET.Matrix.Solvers
             CheckArrays();
         }
 
+        /// <summary>
+        /// Find all pure solutions
+        /// </summary>
         // O(n * m)
         public IEnumerable<P2PureSolution> BruteForceSolutions()
         {
@@ -47,6 +59,9 @@ namespace GameSolver.NET.Matrix.Solvers
             }
         }
 
+        /// <summary>
+        /// Find mixed solutions for 2x2 matrix
+        /// </summary>
         public P2MixedSolution Get2x2MixedSolution()
         {
             if (P1Actions != 2 || P2Actions != 2)

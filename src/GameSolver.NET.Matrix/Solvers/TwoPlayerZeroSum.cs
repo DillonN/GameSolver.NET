@@ -8,6 +8,9 @@ using GameSolver.NET.Common.Models;
 
 namespace GameSolver.NET.Matrix.Solvers
 {
+    /// <summary>
+    /// Solver for a two-player zero-sum game
+    /// </summary>
     public class TwoPlayerZeroSum : TwoPlayerSolver
     {
         private IReadOnlyList<IReadOnlyList<double>> Matrix => Matrices[0];
@@ -56,6 +59,11 @@ namespace GameSolver.NET.Matrix.Solvers
             return cost;
         }
         
+        /// <summary>
+        /// Find pure solutions using minmax
+        /// Not included in benchmarks
+        /// </summary>
+        /// <returns></returns>
         // O(n * m)
         public IEnumerable<P2ZSMixedSolution> MinMaxSolution()
         {
@@ -106,6 +114,9 @@ namespace GameSolver.NET.Matrix.Solvers
             }
         }
 
+        /// <summary>
+        /// Get mixed solution for both players, if matrix is 2x2. Else for player 1
+        /// </summary>
         public P2ZSMixedSolution GetMixedSolution()
         {
             var p1 = MixedStrategyForPlayer(1);
@@ -123,99 +134,35 @@ namespace GameSolver.NET.Matrix.Solvers
 
             return new P2ZSMixedSolution(p1.X, p2X, p1.Y, p2Y, result);
         }
-
-        public Point2D StrategyForPlayerArray(int player = 1)
-        {
-            // Find best response funcs
-            var brfs = new Line2D[P2Actions];
-
-            var maxIndex = 0;
-            var maxValue = double.MinValue;
-
-            for (var i = 0; i < P2Actions; i++)
-            {
-                var p1 = new Point2D(0, BestResponse(0, i));
-                var p2 = new Point2D(1, BestResponse(1, i));
-                brfs[i] = new Line2D(p1, p2);
-
-                if (!(p1.Y > maxValue)) continue;
-
-                maxValue = p1.Y;
-                maxIndex = i;
-            }
-
-            // Find intersections
-            var ints = new Point2D?[brfs.Length][];
-            for (var i = 0; i < brfs.Length; i++)
-            {
-                ints[i] = new Point2D?[brfs.Length];
-                for (var j = 0; j < brfs.Length; j++)
-                {
-                    // Short circuit to null if on the same line
-                    ints[i][j] = i == j ? null : brfs[i].IntersectWith(brfs[j]);
-                }
-            }
-
-            var topLineIntersections = new List<Point2D> { brfs[maxIndex].StartPoint };
-            var currentIndex = maxIndex;
-
-            while (true)
-            {
-                var nextIntersection = new Point2D(double.MaxValue, double.MinValue);
-                var currentCompareIndex = currentIndex;
-                for (var i = 0; i < brfs.Length; i++)
-                {
-                    if ((ints[currentIndex][i]?.X < nextIntersection.X ||
-                        ints[currentIndex][i]?.Y > nextIntersection.Y) &&
-                        ints[currentIndex][i]?.X > topLineIntersections.Last().X)
-                    {
-                        nextIntersection = ints[currentIndex][i].Value;
-                        currentCompareIndex = i;
-                    }
-                }
-
-                if (currentCompareIndex == currentIndex)
-                    break;
-
-                currentIndex = currentCompareIndex;
-                topLineIntersections.Add(nextIntersection);
-            }
-
-            if (topLineIntersections.Last().X < 1)
-            {
-                topLineIntersections.Add(brfs[currentIndex].EndPoint);
-            }
-
-            var compY = new Point2DComparerY();
-            topLineIntersections.Sort(compY);
-
-            return topLineIntersections[0];
-        }
-
+        
+        /// <summary>
+        /// Find mixed solution for given player. 
+        /// </summary>
         // O(n^3)
         public Point2D MixedStrategyForPlayer(int player = 1)
         {
             // Only valid for n x 2 matrices
             if (P1Actions > 2)
                 throw new InvalidOperationException("Graphical method only available for nx2 matrices");
-            var x = BestResponses(player)
-                .AsParallel()
+
+            // Get a list of all intersections on the top line
+            var x = BestResponses(player)  // All best responses for player
+                .AsParallel()  // Run this calculation in parallel
                 .SelectMany(brf1 => 
-                    BestResponses(player, brf1)
-                    //.Where(b => b != brf1)
-                    .Select(brf1.IntersectWith)
-                    .Where(intersect => intersect != null)
-                    .Select(intersect => intersect.Value)
+                    BestResponses(player, brf1)  // Select all best responses after the current one
+                    .Select(brf1.IntersectWith)  // Select intersections from current and this brf
+                    .Where(intersect => intersect != null)  // Skip if no intersection found
+                    .Select(intersect => intersect.Value)  
                     .Where(intersect => 
-                        !BestResponses(player)
-                        .Where(b => b != brf1)
-                        .Any(b => b.GetYForX(intersect.X) > intersect.Y)
+                        !BestResponses(player)  // Iterate over all brfs again
+                        .Any(b => b.GetYForX(intersect.X) > intersect.Y)  // Select only intersections that are on the top line
                     )
                 )
-                .OrderBy(p => p.Y);
+                .OrderBy(p => p.Y);  // Order by Y value so the first will be the lowest
 
             try
             {
+                // All of the calculations in x are deferred, they will not run until this call
                 return x.First();
             }
             catch (InvalidOperationException)
@@ -234,11 +181,11 @@ namespace GameSolver.NET.Matrix.Solvers
             }
         }
 
-        private double BestResponse(double x1, int p2Index)
-        {
-            return (Matrices[0][0][p2Index] - Matrices[0][1][p2Index]) * x1 + Matrices[0][1][p2Index];
-        }
-
+        /// <summary>
+        /// Enumerate best response functions
+        /// </summary>
+        /// <param name="player">Player to enumerate for</param>
+        /// <param name="start">Start from a given function</param>
         private IEnumerable<Line2D> BestResponses(int player, Line2D? start = null)
         {
             if (player > 2 || player < 1)
@@ -248,31 +195,40 @@ namespace GameSolver.NET.Matrix.Solvers
                 if (P2Actions != 2)
                     throw new InvalidOperationException();
 
+                // Trivial case for finding P2 solutions in 2x2 matrix
                 yield return new Line2D(new Point2D(0, -Matrix[1][0]), new Point2D(1, -Matrix[0][0]));
                 yield return new Line2D(new Point2D(0, -Matrix[1][1]), new Point2D(1, -Matrix[0][1]));
                 yield break;
             }
 
             var started = !start.HasValue;
+            // Iterate over matrix rows simultaneously
             using (var e1 = Matrix[0].GetEnumerator())
             using (var e2 = Matrix[1].GetEnumerator())
             {
+                // Important to use & so both values are moved next
                 while (e1.MoveNext() & e2.MoveNext())
                 {
+                    // The best response function for this column
                     var line = new Line2D(new Point2D(0, e2.Current),
                         new Point2D(1, e1.Current));
                     if (!started && line == start)
                     {
+                        // We have found the line to start from, so start returning results on next iteration
                         started = true;
                     }
                     else
                     {
+                        // Return BRF
                         yield return line;
                     }
                 }
             }
         }
 
+        /// <summary>
+        /// Get negative of a matrix
+        /// </summary>
         private static double[][] NegativeMatrix(IReadOnlyList<IReadOnlyList<double>> matrix)
         {
             var m = new double[matrix.Count][];

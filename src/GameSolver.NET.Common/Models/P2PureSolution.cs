@@ -2,6 +2,9 @@
 
 namespace GameSolver.NET.Common.Models
 {
+    /// <summary>
+    /// Two player pure solution model.
+    /// </summary>
     public readonly struct P2PureSolution : IP2Solution, IEquatable<P2PureSolution>
     {
         public readonly int P1Action;

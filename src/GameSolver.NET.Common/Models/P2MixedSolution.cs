@@ -2,6 +2,9 @@
 
 namespace GameSolver.NET.Common.Models
 {
+    /// <summary>
+    /// Mixed two player solution, where players can choose one of two actions
+    /// </summary>
     public readonly struct P2MixedSolution : IP2Solution, IEquatable<P2MixedSolution>
     {
         public readonly double P1Action1;

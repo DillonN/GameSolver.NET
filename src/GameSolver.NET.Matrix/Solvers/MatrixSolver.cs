@@ -6,8 +6,12 @@ using System.Runtime.CompilerServices;
 
 namespace GameSolver.NET.Matrix.Solvers
 {
+    /// <summary>
+    /// Base class for matrix solutions
+    /// </summary>
     public abstract class MatrixSolver
     {
+        // Currently this never gets higher than two
         protected readonly IReadOnlyList<IReadOnlyList<double>>[] Matrices;
 
         protected MatrixSolver(params IReadOnlyList<IReadOnlyList<double>>[] matrices)
@@ -24,6 +28,9 @@ namespace GameSolver.NET.Matrix.Solvers
             Matrices = matrices.Select(ParseMatrix).ToArray();
         }
 
+        /// <summary>
+        /// Parse CSV matrices
+        /// </summary>
         protected static double[][] ParseMatrix(string matrix)
         {
             var rows = matrix.Split('\n');

@@ -1,11 +1,17 @@
 ﻿namespace GameSolver.NET.Common.Models
 {
+    /// <summary>
+    /// Two player zero-sum mixed solution.
+    /// </summary>
     public readonly struct P2ZSMixedSolution
     {
         public readonly double P1Action;
+        // Null if no actions calculated for P2
         public readonly double? P2Action;
         public readonly double P1Security;
+        // Null if no actions calculated for P2
         public readonly double? P2Security;
+        // Null if no actions calculated for P2
         public readonly double? Result;
 
         public bool IsSaddle => P1Security == P2Security;

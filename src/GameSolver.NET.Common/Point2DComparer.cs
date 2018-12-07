@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace GameSolver.NET.Common
 {
+    /// <summary>
+    /// Compare a Point2D by its X value
+    /// </summary>
     public class Point2DComparerX : IComparer<Point2D>
     {
         public int Compare(Point2D x, Point2D y)
@@ -11,6 +14,9 @@ namespace GameSolver.NET.Common
         }
     }
 
+    /// <summary>
+    /// Compare a Point2D by its Y value
+    /// </summary>
     public class Point2DComparerY : IComparer<Point2D>
     {
         public int Compare(Point2D x, Point2D y)

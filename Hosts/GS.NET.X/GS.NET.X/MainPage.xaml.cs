@@ -6,11 +6,15 @@ namespace GS.NET.X
 {
     public partial class MainPage : ContentPage
     {
+        /// <summary>
+        /// Host for smartphone testing
+        /// Class can be referenced by an iOS application
+        /// </summary>
         public MainPage()
         {
             InitializeComponent();
-            ResultsLabel.Text = "blarg";
-            Console.WriteLine("blarg");
+            // Label will show results in app
+            ResultsLabel.Text = "";
             if (true)
             {
                 foreach (var x in Benchmark.Mixed(5, 100))
