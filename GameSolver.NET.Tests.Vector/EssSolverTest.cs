@@ -1,11 +1,11 @@
-using GameSolver.NET.Vector.Solvers;
+using GameSolver.NET.Population.Solvers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
 
-namespace GameSolver.NET.Tests.Vector
+namespace GameSolver.NET.Tests.Population
 {
     [TestClass]
-    public class UnitTest1
+    public class EssSolverTest
     {
         private const string Matrix1 = @"-4,0
 -1,-1";
