@@ -10,12 +10,12 @@ namespace GameSolver.NET.Benchmarking
     {
         private static Random _r = new Random(65846);
 
-        public static IEnumerable<string> Pure(int powers = 5, int values = 10)
+        public static IEnumerable<string> Pure(int powers = 5, int values = 100)
         {
             return Bench(PureImpl, powers, values);
         }
 
-        public static IEnumerable<string> Mixed(int powers = 5, int values = 10)
+        public static IEnumerable<string> Mixed(int powers = 5, int values = 100)
         {
             return Bench(MixedImpl, powers, values);
         }
@@ -26,7 +26,7 @@ namespace GameSolver.NET.Benchmarking
 
             for (var i = 1; i < powers; i++)
             {
-                var length = (int) Math.Pow(10, i);
+                var length = (int) Math.Pow(10, 1);
 
                 var tsReal = new TimeSpan();
                 var tsCpu = new TimeSpan();

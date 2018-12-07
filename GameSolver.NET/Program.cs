@@ -11,7 +11,7 @@ namespace GameSolver.NET
     {
         private static void Main(string[] args)
         {
-            if (false)
+            if (true)
             {
                 Console.WriteLine("Pure:");
 
