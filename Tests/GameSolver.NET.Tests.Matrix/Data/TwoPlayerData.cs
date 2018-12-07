@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace GameSolver.NET.Tests.Matrix.Data
+﻿namespace GameSolver.NET.Tests.Matrix.Data
 {
     internal static class TwoPlayerData
     {

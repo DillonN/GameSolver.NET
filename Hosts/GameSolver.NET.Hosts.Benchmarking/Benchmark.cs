@@ -1,8 +1,8 @@
-﻿using System;
+﻿using GameSolver.NET.Matrix.Solvers;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using GameSolver.NET.Matrix.Solvers;
 
 namespace GameSolver.NET.Hosts.Benchmarking
 {
