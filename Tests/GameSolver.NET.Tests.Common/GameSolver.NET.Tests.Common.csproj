@@ -20,8 +20,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GameSolver.NET.Common\GameSolver.NET.Common.csproj" />
-    <ProjectReference Include="..\MathNet.Spatial\MathNet.Spatial.csproj" />
+    <ProjectReference Include="..\..\src\GameSolver.NET.Common\GameSolver.NET.Common.csproj" />
+    <ProjectReference Include="..\..\src\MathNet.Spatial\MathNet.Spatial.csproj" />
   </ItemGroup>
 
 </Project>

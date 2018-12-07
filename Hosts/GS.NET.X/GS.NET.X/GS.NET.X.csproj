@@ -20,6 +20,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\GameSolver.NET.Benchmarking\GameSolver.NET.Benchmarking.csproj" />
+    <ProjectReference Include="..\..\GameSolver.NET.Hosts.Benchmarking\GameSolver.NET.Hosts.Benchmarking.csproj" />
   </ItemGroup>
 </Project>

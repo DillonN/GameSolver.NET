@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GameSolver.NET.Matrix\GameSolver.NET.Matrix.csproj" />
+    <ProjectReference Include="..\..\src\GameSolver.NET.Matrix\GameSolver.NET.Matrix.csproj" />
   </ItemGroup>
 
 </Project>

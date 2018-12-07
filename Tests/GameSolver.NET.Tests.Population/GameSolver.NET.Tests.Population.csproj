@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GameSolver.NET.Vector\GameSolver.NET.Population.csproj" />
+    <ProjectReference Include="..\..\src\GameSolver.NET.Population\GameSolver.NET.Population.csproj" />
   </ItemGroup>
 
 </Project>

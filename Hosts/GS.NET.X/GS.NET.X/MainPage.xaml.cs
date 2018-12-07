@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GameSolver.NET.Benchmarking;
+﻿using GameSolver.NET.Hosts.Benchmarking;
+using System;
 using Xamarin.Forms;
 
 namespace GS.NET.X

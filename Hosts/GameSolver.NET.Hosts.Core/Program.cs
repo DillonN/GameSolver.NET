@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using GameSolver.NET.Matrix.Solvers;
-using GameSolver.NET.Benchmarking;
+﻿using GameSolver.NET.Hosts.Benchmarking;
+using System;
 
-namespace GameSolver.NET
+namespace GameSolver.NET.Hosts.Core
 {
-    internal class Program
+    internal static class Program
     {
         private static void Main(string[] args)
         {

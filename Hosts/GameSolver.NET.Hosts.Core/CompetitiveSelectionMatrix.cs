@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace GameSolver.NET.Core
+namespace GameSolver.NET.Hosts.Core
 {
     /// <summary>
     /// Example for a custom IReadOnlyList<IReadOnlyList<double>> implementation.
