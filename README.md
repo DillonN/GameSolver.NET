@@ -2,7 +2,7 @@
 
 GameSolver.NET aims to solve game theory problems in a portable way that can be referenced by any .NET program or assembly.
 
-Compatibility with native applications (e.g. C++) can be accomplished easily by exposing methods to COM interop.
+Compatibility with native applications (e.g. C++) can be accomplished easily by exposing methods to COM interop. This still requires that a .NET runtime be available on the platform.
 
 ## Layout
 
