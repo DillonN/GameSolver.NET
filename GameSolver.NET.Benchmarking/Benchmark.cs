@@ -107,7 +107,7 @@ namespace GameSolver.NET.Benchmarking
 
             var tCpu = me.TotalProcessorTime;
             s.Start();
-            var x = t.StrategyForPlayerEn(1);
+            var x = t.MixedStrategyForPlayer(1);
             s.Stop();
             tCpu = me.TotalProcessorTime - tCpu;
 

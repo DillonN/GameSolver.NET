@@ -12,19 +12,13 @@ namespace GameSolver.NET.Matrix.Solvers
     {
         private IReadOnlyList<IReadOnlyList<double>> Matrix => Matrices[0];
 
-        public TwoPlayerZeroSum(double[][] matrix)
+        public TwoPlayerZeroSum(IReadOnlyList<IReadOnlyList<double>> matrix)
             : base(matrix, NegativeMatrix(matrix))
-        {
-            //_matrix = new IEnumerable<double>[2];
-            //_matrix[0] = matrix[0];
-            //_matrix[1] = matrix[1];
-        }
+        { }
 
-        // Using static instead of constructor so we don't have to parse the matrix twice
-        public static TwoPlayerZeroSum Parse(string matrix)
-        {
-            return new TwoPlayerZeroSum(ParseMatrix(matrix));
-        }
+        public TwoPlayerZeroSum(string matrix) :
+            this(ParseMatrix(matrix))
+        { }
 
         public double CostForPureActions(int player, int u1, int u2)
         {
@@ -114,23 +108,23 @@ namespace GameSolver.NET.Matrix.Solvers
 
         public P2ZSMixedSolution GetMixedSolution()
         {
-            var p1 = StrategyForPlayerEn(1);
-            double? p2x = null;
-            double? p2y = null;
+            var p1 = MixedStrategyForPlayer(1);
+            double? p2X = null;
+            double? p2Y = null;
             double? result = null;
             if (P2Actions == 2)
             {
-                var p2 = StrategyForPlayerEn(2);
-                p2x = p2.X;
-                p2y = p2.Y;
+                var p2 = MixedStrategyForPlayer(2);
+                p2X = p2.X;
+                p2Y = p2.Y;
 
-                result = CostForMixed(Matrix, p1.X, p2x.Value);
+                result = CostForMixed(Matrix, p1.X, p2X.Value);
             }
 
-            return new P2ZSMixedSolution(p1.X, p2x, p1.Y, p2y, result);
+            return new P2ZSMixedSolution(p1.X, p2X, p1.Y, p2Y, result);
         }
 
-        public Point2D StrategyForPlayer(int player)
+        public Point2D StrategyForPlayerArray(int player = 1)
         {
             // Find best response funcs
             var brfs = new Line2D[P2Actions];
@@ -199,7 +193,7 @@ namespace GameSolver.NET.Matrix.Solvers
         }
 
         // O(n^3)
-        public Point2D StrategyForPlayerEn(int player)
+        public Point2D MixedStrategyForPlayer(int player = 1)
         {
             // Only valid for n x 2 matrices
             if (P1Actions > 2)
@@ -279,13 +273,13 @@ namespace GameSolver.NET.Matrix.Solvers
             }
         }
 
-        private static double[][] NegativeMatrix(IReadOnlyList<double[]> matrix)
+        private static double[][] NegativeMatrix(IReadOnlyList<IReadOnlyList<double>> matrix)
         {
             var m = new double[matrix.Count][];
             for (var i = 0; i < matrix.Count; i++)
             {
-                var row = new double[matrix[i].Length];
-                for (var j = 0; j < matrix[i].Length; j++)
+                var row = new double[matrix[i].Count];
+                for (var j = 0; j < matrix[i].Count; j++)
                 {
                     row[j] = -matrix[i][j];
                 }
@@ -294,11 +288,6 @@ namespace GameSolver.NET.Matrix.Solvers
             }
 
             return m;
-        }
-
-        private static int OtherPlayer(int player)
-        {
-            return player == 0 ? 1 : 0;
         }
     }
 }

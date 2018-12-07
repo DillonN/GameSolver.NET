@@ -12,7 +12,7 @@ namespace GameSolver.NET.Tests.Matrix.Solvers
         [TestMethod]
         public void TestGame1()
         {
-            var t = TwoPlayerZeroSum.Parse(TwoPlayerZeroSumData.TestGame1);
+            var t = new TwoPlayerZeroSum(TwoPlayerZeroSumData.TestGame1);
             
             Assert.AreEqual(t.CostForPureActions(0, 0, 0), 2);
             Assert.AreEqual(t.CostForPureActions(1, 0, 0), -2);
@@ -20,7 +20,7 @@ namespace GameSolver.NET.Tests.Matrix.Solvers
 
             Assert.AreEqual(t.CostForMixedActions(0, new [] { 0.5, 0.5 }, new [] { 0.2, 0.4, 0, 0.4 }), 2.4, Delta);
 
-            var s = t.StrategyForPlayerEn(1);
+            var s = t.MixedStrategyForPlayer(1);
 
             Assert.AreEqual(s.X, 4d / 7, Delta);
             Assert.AreEqual(s.Y, 20d / 7, Delta);
@@ -29,7 +29,7 @@ namespace GameSolver.NET.Tests.Matrix.Solvers
         [TestMethod]
         public void TestGame2()
         {
-            var t = TwoPlayerZeroSum.Parse(TwoPlayerZeroSumData.TestGame2);
+            var t = new TwoPlayerZeroSum(TwoPlayerZeroSumData.TestGame2);
 
             var s = t.MinMaxSolution().First();
 
@@ -44,7 +44,7 @@ namespace GameSolver.NET.Tests.Matrix.Solvers
         [TestMethod]
         public void TestGame3()
         {
-            var t = TwoPlayerZeroSum.Parse(TwoPlayerZeroSumData.TestGame3);
+            var t = new TwoPlayerZeroSum(TwoPlayerZeroSumData.TestGame3);
 
             var s = t.MinMaxSolution().First();
 
@@ -59,7 +59,7 @@ namespace GameSolver.NET.Tests.Matrix.Solvers
         [TestMethod]
         public void TestGame4()
         {
-            var t = TwoPlayerZeroSum.Parse(TwoPlayerZeroSumData.TestGame4);
+            var t = new TwoPlayerZeroSum(TwoPlayerZeroSumData.TestGame4);
 
             foreach (var s in t.MinMaxSolution())
             {
@@ -72,7 +72,7 @@ namespace GameSolver.NET.Tests.Matrix.Solvers
         [TestMethod]
         public void TestGame5()
         {
-            var t = TwoPlayerZeroSum.Parse(TwoPlayerZeroSumData.TestGame5);
+            var t = new TwoPlayerZeroSum(TwoPlayerZeroSumData.TestGame5);
 
             var ss = t.MinMaxSolution().ToList();
 
@@ -101,7 +101,7 @@ namespace GameSolver.NET.Tests.Matrix.Solvers
         [TestMethod]
         public void TestGame6()
         {
-            var t = TwoPlayerZeroSum.Parse(TwoPlayerZeroSumData.TestGame6);
+            var t = new TwoPlayerZeroSum(TwoPlayerZeroSumData.TestGame6);
 
             var ss = t.MinMaxSolution().ToList();
 
@@ -131,7 +131,7 @@ namespace GameSolver.NET.Tests.Matrix.Solvers
         [TestMethod]
         public void TestGame7()
         {
-            var t = TwoPlayerZeroSum.Parse(TwoPlayerZeroSumData.TestGame7);
+            var t = new TwoPlayerZeroSum(TwoPlayerZeroSumData.TestGame7);
 
             var s = t.GetMixedSolution();
 
@@ -147,7 +147,7 @@ namespace GameSolver.NET.Tests.Matrix.Solvers
         [TestMethod]
         public void TestGame8()
         {
-            var t = TwoPlayerZeroSum.Parse(TwoPlayerZeroSumData.TestGame8);
+            var t = new TwoPlayerZeroSum(TwoPlayerZeroSumData.TestGame8);
 
             var s = t.GetMixedSolution();
 

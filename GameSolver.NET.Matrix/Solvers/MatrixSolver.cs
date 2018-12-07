@@ -1,22 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Runtime.CompilerServices;
+
+[assembly:InternalsVisibleTo("GameSolver.NET.Tests.Matrix")]
 
 namespace GameSolver.NET.Matrix.Solvers
 {
     public abstract class MatrixSolver
     {
-        protected IReadOnlyList<IReadOnlyList<double>>[] Matrices;
+        protected readonly IReadOnlyList<IReadOnlyList<double>>[] Matrices;
 
         protected MatrixSolver(params IReadOnlyList<IReadOnlyList<double>>[] matrices)
         {
-            // Check inner arrays are rectangular with same dimensions
-            
-            for (var i = 0; i < matrices.Length; i++)
-            {
-
-            }
             Matrices = matrices;
         }
 

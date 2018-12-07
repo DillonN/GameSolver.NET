@@ -1,9 +1,8 @@
-﻿using System;
+﻿using GameSolver.NET.Common.Models;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using GameSolver.NET.Common.Models;
 
 namespace GameSolver.NET.Matrix.Solvers
 {
@@ -46,13 +45,6 @@ namespace GameSolver.NET.Matrix.Solvers
                     yield return new P2PureSolution(i + 1, j + 1, P1Matrix[i][j], P2Matrix[i][j]);
                 }
             }
-
-            //return P1Matrix
-            //    .AsParallel()
-            //    .SelectMany((c, i) => c
-            //        .Select((d, j) => new TwoPlayerSolution(i + 1, j + 1, d, P2Matrix[i][j])))
-            //    .Where(s => s.P1Result <= minRows[s.P2Action - 1])//1Matrix.Any(r => r[s.P2Action - 1] < s.P1Result))
-            //    .Where(s => s.P2Result <= minCols[s.P1Action - 1]);// !P2Matrix[s.P1Action - 1].Any(v => v < s.P2Result));
         }
 
         public P2MixedSolution Get2x2MixedSolution()
