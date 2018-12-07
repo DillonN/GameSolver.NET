@@ -26,7 +26,7 @@ namespace GameSolver.NET.Benchmarking
 
             for (var i = 1; i < powers; i++)
             {
-                var length = (int) Math.Pow(10, 1);
+                var length = (int) Math.Pow(10, powers);
 
                 var tsReal = new TimeSpan();
                 var tsCpu = new TimeSpan();
