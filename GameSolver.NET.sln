@@ -3,33 +3,35 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2048
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameSolver.NET.Core", "GameSolver.NET\GameSolver.NET.Core.csproj", "{2F218836-8210-45E2-A850-44213DD1597F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameSolver.NET.Hosts.Core", "Hosts\GameSolver.NET.Hosts.Core\GameSolver.NET.Hosts.Core.csproj", "{2F218836-8210-45E2-A850-44213DD1597F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameSolver.NET.Matrix", "GameSolver.NET.Matrix\GameSolver.NET.Matrix.csproj", "{C4E701B7-FCB1-4843-AD2A-30DF4ADA8863}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameSolver.NET.Matrix", "src\GameSolver.NET.Matrix\GameSolver.NET.Matrix.csproj", "{C4E701B7-FCB1-4843-AD2A-30DF4ADA8863}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameSolver.NET.Common", "GameSolver.NET.Common\GameSolver.NET.Common.csproj", "{06138A23-8A65-4FCB-AB53-60DCC79F1494}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameSolver.NET.Common", "src\GameSolver.NET.Common\GameSolver.NET.Common.csproj", "{06138A23-8A65-4FCB-AB53-60DCC79F1494}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{22190D55-1BC8-4267-9FEC-F247CAB163D3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameSolver.NET.Tests.Matrix", "GameSolver.NET.Tests.Matrix\GameSolver.NET.Tests.Matrix.csproj", "{7BA3A019-7CE7-44D7-BB02-2F0BA1154787}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameSolver.NET.Tests.Matrix", "Tests\GameSolver.NET.Tests.Matrix\GameSolver.NET.Tests.Matrix.csproj", "{7BA3A019-7CE7-44D7-BB02-2F0BA1154787}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameSolver.NET.Tests.Common", "GameSolver.NET.Tests.Common\GameSolver.NET.Tests.Common.csproj", "{EDA741A6-EF58-445B-8E6F-076FC8BB49AA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameSolver.NET.Tests.Common", "Tests\GameSolver.NET.Tests.Common\GameSolver.NET.Tests.Common.csproj", "{EDA741A6-EF58-445B-8E6F-076FC8BB49AA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameSolver.NET.Extensions", "GameSolver.NET.Extensions\GameSolver.NET.Extensions.csproj", "{73E556FB-A034-46D1-8854-A9AC1054EE96}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameSolver.NET.Extensions", "src\GameSolver.NET.Extensions\GameSolver.NET.Extensions.csproj", "{73E556FB-A034-46D1-8854-A9AC1054EE96}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameSolver.NET.Vector", "GameSolver.NET.Vector\GameSolver.NET.Vector.csproj", "{5FED0A1B-ECDD-4293-994D-A46E99422399}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameSolver.NET.Population", "src\GameSolver.NET.Population\GameSolver.NET.Population.csproj", "{5FED0A1B-ECDD-4293-994D-A46E99422399}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameSolver.NET.Tests.Vector", "GameSolver.NET.Tests.Vector\GameSolver.NET.Tests.Vector.csproj", "{9482DA4C-D92E-4896-87C9-C0AAFEA56145}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameSolver.NET.Tests.Population", "Tests\GameSolver.NET.Tests.Population\GameSolver.NET.Tests.Population.csproj", "{9482DA4C-D92E-4896-87C9-C0AAFEA56145}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameSolver.NET.Benchmarking", "GameSolver.NET.Benchmarking\GameSolver.NET.Benchmarking.csproj", "{B8770225-657B-44EB-8731-943F82C4FAED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameSolver.NET.Hosts.Benchmarking", "Hosts\GameSolver.NET.Hosts.Benchmarking\GameSolver.NET.Hosts.Benchmarking.csproj", "{B8770225-657B-44EB-8731-943F82C4FAED}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GameSolver.NET", "GameSolver.NET", "{EFDE1C82-3860-406A-B5BD-E4F17A5FD409}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GS.NET.X.Android", "GS.NET.X\GS.NET.X.Android\GS.NET.X.Android.csproj", "{46D8D396-41FE-4435-9FD5-E0F287D04D5F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GS.NET.X.Android", "Hosts\GS.NET.X\GS.NET.X.Android\GS.NET.X.Android.csproj", "{46D8D396-41FE-4435-9FD5-E0F287D04D5F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GS.NET.X", "GS.NET.X\GS.NET.X\GS.NET.X.csproj", "{7B1FFB8F-831D-40D7-A871-F2DB58810FAF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GS.NET.X", "Hosts\GS.NET.X\GS.NET.X\GS.NET.X.csproj", "{7B1FFB8F-831D-40D7-A871-F2DB58810FAF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MathNet.Spatial", "MathNet.Spatial\MathNet.Spatial.csproj", "{96DC1615-24D6-4E96-BB06-7170E7B28026}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MathNet.Spatial", "src\MathNet.Spatial\MathNet.Spatial.csproj", "{96DC1615-24D6-4E96-BB06-7170E7B28026}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Hosts", "Hosts", "{EEFA7ED9-C760-42F0-8D9C-0CFC7A2A1889}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -92,6 +94,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{2F218836-8210-45E2-A850-44213DD1597F} = {EEFA7ED9-C760-42F0-8D9C-0CFC7A2A1889}
 		{C4E701B7-FCB1-4843-AD2A-30DF4ADA8863} = {EFDE1C82-3860-406A-B5BD-E4F17A5FD409}
 		{06138A23-8A65-4FCB-AB53-60DCC79F1494} = {EFDE1C82-3860-406A-B5BD-E4F17A5FD409}
 		{7BA3A019-7CE7-44D7-BB02-2F0BA1154787} = {22190D55-1BC8-4267-9FEC-F247CAB163D3}
@@ -99,7 +102,9 @@ Global
 		{73E556FB-A034-46D1-8854-A9AC1054EE96} = {EFDE1C82-3860-406A-B5BD-E4F17A5FD409}
 		{5FED0A1B-ECDD-4293-994D-A46E99422399} = {EFDE1C82-3860-406A-B5BD-E4F17A5FD409}
 		{9482DA4C-D92E-4896-87C9-C0AAFEA56145} = {22190D55-1BC8-4267-9FEC-F247CAB163D3}
-		{B8770225-657B-44EB-8731-943F82C4FAED} = {EFDE1C82-3860-406A-B5BD-E4F17A5FD409}
+		{B8770225-657B-44EB-8731-943F82C4FAED} = {EEFA7ED9-C760-42F0-8D9C-0CFC7A2A1889}
+		{46D8D396-41FE-4435-9FD5-E0F287D04D5F} = {EEFA7ED9-C760-42F0-8D9C-0CFC7A2A1889}
+		{7B1FFB8F-831D-40D7-A871-F2DB58810FAF} = {EEFA7ED9-C760-42F0-8D9C-0CFC7A2A1889}
 		{96DC1615-24D6-4E96-BB06-7170E7B28026} = {EFDE1C82-3860-406A-B5BD-E4F17A5FD409}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
