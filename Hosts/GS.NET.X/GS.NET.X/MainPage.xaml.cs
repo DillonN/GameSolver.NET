@@ -9,8 +9,7 @@ namespace GS.NET.X
         public MainPage()
         {
             InitializeComponent();
-            ResultsLabel.Text = "blarg";
-            Console.WriteLine("blarg");
+            ResultsLabel.Text = "";
             if (true)
             {
                 foreach (var x in Benchmark.Mixed(5, 100))

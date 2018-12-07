@@ -1,8 +1,8 @@
-﻿using System;
+﻿using GameSolver.NET.Common.Models;
+using GameSolver.NET.Matrix.Solvers;
+using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
-using GameSolver.NET.Common.Models;
-using GameSolver.NET.Matrix.Solvers;
 
 [assembly: InternalsVisibleTo("GameSolver.NET.Tests.Population")]
 

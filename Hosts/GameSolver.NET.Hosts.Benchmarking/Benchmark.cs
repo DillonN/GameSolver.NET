@@ -1,14 +1,14 @@
-﻿using System;
+﻿using GameSolver.NET.Matrix.Solvers;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using GameSolver.NET.Matrix.Solvers;
 
 namespace GameSolver.NET.Hosts.Benchmarking
 {
     public static class Benchmark
     {
-        private static Random _r = new Random(65846);
+        private static readonly Random R = new Random(65846);
 
         public static IEnumerable<string> Pure(int powers = 5, int values = 100)
         {
@@ -22,8 +22,6 @@ namespace GameSolver.NET.Hosts.Benchmarking
 
         private static IEnumerable<string> Bench(Func<int, int, (TimeSpan, TimeSpan, int, long)> func, int powers, int values)
         {
-            var s = new Stopwatch();
-
             for (var i = 1; i < powers; i++)
             {
                 var length = (int) Math.Pow(10, powers);
@@ -117,7 +115,7 @@ namespace GameSolver.NET.Hosts.Benchmarking
         private static IEnumerable<double> RandomColumns(int amount, int values)
         {
             for (var i = 0; i < amount; i++)
-                yield return _r.Next(values);
+                yield return R.Next(values);
         }
     }
 }
