@@ -2,14 +2,14 @@
 
 namespace GameSolver.NET.Common.Models
 {
-    public readonly struct TwoPlayerSolution : IP2Solution, IEquatable<TwoPlayerSolution>
+    public readonly struct P2PureSolution : IP2Solution, IEquatable<P2PureSolution>
     {
         public readonly int P1Action;
         public readonly int P2Action;
         public double P1Result { get; }
         public double P2Result { get; }
 
-        public TwoPlayerSolution(int p1A, int p2A, double p1R, double p2R)
+        public P2PureSolution(int p1A, int p2A, double p1R, double p2R)
         {
             P1Action = p1A;
             P2Action = p2A;
@@ -32,27 +32,27 @@ namespace GameSolver.NET.Common.Models
             return other is IP2Solution sol ? CompareTo(sol) : throw new InvalidOperationException();
         }
 
-        public static bool operator <(TwoPlayerSolution left, IP2Solution right)
+        public static bool operator <(P2PureSolution left, IP2Solution right)
         {
             return left.CompareTo(right) < 0;
         }
 
-        public static bool operator >(TwoPlayerSolution left, IP2Solution right)
+        public static bool operator >(P2PureSolution left, IP2Solution right)
         {
             return left.CompareTo(right) > 0;
         }
 
-        public static bool operator <=(TwoPlayerSolution left, IP2Solution right)
+        public static bool operator <=(P2PureSolution left, IP2Solution right)
         {
             return left.CompareTo(right) <= 0;
         }
 
-        public static bool operator >=(TwoPlayerSolution left, IP2Solution right)
+        public static bool operator >=(P2PureSolution left, IP2Solution right)
         {
             return left.CompareTo(right) >= 0;
         }
 
-        public bool Equals(TwoPlayerSolution other)
+        public bool Equals(P2PureSolution other)
         {
             return P1Action == other.P1Action && P2Action == other.P2Action && 
                    P1Result.Equals(other.P1Result) && P2Result.Equals(other.P2Result);
@@ -61,7 +61,7 @@ namespace GameSolver.NET.Common.Models
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
-            return obj is TwoPlayerSolution other && Equals(other);
+            return obj is P2PureSolution other && Equals(other);
         }
 
         public override int GetHashCode()
@@ -69,12 +69,12 @@ namespace GameSolver.NET.Common.Models
             return base.GetHashCode();
         }
 
-        public static bool operator ==(TwoPlayerSolution left, TwoPlayerSolution right)
+        public static bool operator ==(P2PureSolution left, P2PureSolution right)
         {
             return left.Equals(right);
         }
 
-        public static bool operator !=(TwoPlayerSolution left, TwoPlayerSolution right)
+        public static bool operator !=(P2PureSolution left, P2PureSolution right)
         {
             return !left.Equals(right);
         }

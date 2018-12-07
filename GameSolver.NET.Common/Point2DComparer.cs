@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections;
+﻿using MathNet.Spatial.Euclidean;
 using System.Collections.Generic;
-using System.Text;
-using MathNet.Spatial.Euclidean;
 
 namespace GameSolver.NET.Common
 {

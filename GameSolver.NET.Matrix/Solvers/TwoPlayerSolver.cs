@@ -29,7 +29,7 @@ namespace GameSolver.NET.Matrix.Solvers
         }
 
         // O(n * m)
-        public IEnumerable<TwoPlayerSolution> BruteForceSolutions()
+        public IEnumerable<P2PureSolution> BruteForceSolutions()
         {
             var minCols = P2Matrix.AsParallel().Select(r => r.Min()).ToList();
             var minRows = P1Matrix[0].AsParallel().Select((_, i) => P1Matrix.Select(r => r[i]).Min()).ToList();
@@ -43,7 +43,7 @@ namespace GameSolver.NET.Matrix.Solvers
                         continue;
                     }
 
-                    yield return new TwoPlayerSolution(i + 1, j + 1, P1Matrix[i][j], P2Matrix[i][j]);
+                    yield return new P2PureSolution(i + 1, j + 1, P1Matrix[i][j], P2Matrix[i][j]);
                 }
             }
 

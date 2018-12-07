@@ -25,7 +25,7 @@ namespace GameSolver.NET.Population.Solvers
                 throw new ArgumentException("Must be a square matrix!", nameof(matrix));
         }
 
-        public IEnumerable<TwoPlayerSolution> GetEquilibriums()
+        public IEnumerable<P2PureSolution> GetEquilibriums()
         {
             var nes = _2PSolver.BruteForceSolutions();
 

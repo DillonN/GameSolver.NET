@@ -63,7 +63,7 @@ namespace GameSolver.NET.Matrix.Solvers
         }
         
         // O(n * m)
-        public IEnumerable<TwoPlayerZSSolution> MinMaxSolution()
+        public IEnumerable<P2ZSMixedSolution> MinMaxSolution()
         {
             var p1Actions = new List<int>();
             var p1Security = double.MaxValue;
@@ -107,12 +107,12 @@ namespace GameSolver.NET.Matrix.Solvers
                 {
                     var result = Matrix[p1Action][p2Action];
 
-                    yield return new TwoPlayerZSSolution(p1Action + 1, p2Action + 1, p1Security, p2Security, result);
+                    yield return new P2ZSMixedSolution(p1Action + 1, p2Action + 1, p1Security, p2Security, result);
                 }
             }
         }
 
-        public TwoPlayerZSSolution GetMixedSolution()
+        public P2ZSMixedSolution GetMixedSolution()
         {
             var p1 = StrategyForPlayerEn(1);
             double? p2x = null;
@@ -127,7 +127,7 @@ namespace GameSolver.NET.Matrix.Solvers
                 result = CostForMixed(Matrix, p1.X, p2x.Value);
             }
 
-            return new TwoPlayerZSSolution(p1.X, p2x, p1.Y, p2y, result);
+            return new P2ZSMixedSolution(p1.X, p2x, p1.Y, p2y, result);
         }
 
         public Point2D StrategyForPlayer(int player)

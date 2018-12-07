@@ -1,6 +1,6 @@
 ﻿namespace GameSolver.NET.Common.Models
 {
-    public class TwoPlayerZSSolution
+    public readonly struct P2ZSMixedSolution
     {
         public readonly double P1Action;
         public readonly double? P2Action;
@@ -10,7 +10,7 @@
 
         public bool IsSaddle => P1Security == P2Security;
 
-        public TwoPlayerZSSolution(double p1A, double? p2A, double p1S, double? p2S, double? result)
+        public P2ZSMixedSolution(double p1A, double? p2A, double p1S, double? p2S, double? result)
         {
             P1Action = p1A;
             P2Action = p2A;
