@@ -4,6 +4,8 @@ GameSolver.NET aims to solve game theory problems in a portable way that can be 
 
 Compatibility with native applications (e.g. C++) can be accomplished easily by exposing methods to COM interop. This still requires that a .NET runtime be available on the platform.
 
+The rest of the read-me is meant as a walkthrough of the source for those unfamiliar with the frameworks used. For a comprehensive analysis and the game theory behind the project, see the **[report writeup](GameSolver.pdf)**.
+
 ## Layout
 
 GameSolver.NET contains many projects. They are laid out as follows:
